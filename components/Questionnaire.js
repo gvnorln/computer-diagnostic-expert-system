@@ -51,7 +51,7 @@ const Questionnaire = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="p-4 bg-white rounded shadow-md">
+      <div className="p-4 bg-white rounded shadow-md text-slate-800">
         <p className="mb-4">{currentQuestionIndex + 1}. {questions[currentQuestionIndex]}</p>
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
