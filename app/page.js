@@ -281,37 +281,44 @@ const App = () => {
       </section>
 
       <section id="contact" className="py-16 bg-white">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Kontak Kami</h2>
-          <p className="text-lg text-gray-600">
-            Hubungi kami untuk informasi lebih lanjut tentang layanan kami.
-          </p>
-          <form className="mt-8">
-            <div className="flex flex-col md:flex-row md:space-x-4">
-              <input
-                type="text"
-                placeholder="Nama"
-                className="flex-1 p-2 mb-4 md:mb-0 border border-gray-300 rounded"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="flex-1 p-2 mb-4 md:mb-0 border border-gray-300 rounded"
-              />
-            </div>
-            <textarea
-              placeholder="Pesan"
-              className="w-full p-2 mt-4 border border-gray-300 rounded"
-            ></textarea>
-            <button
-              type="submit"
-              className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-            >
-              Kirim Pesan
-            </button>
-          </form>
+  <div className="container mx-auto">
+    <div className="max-w-lg mx-auto text-center">
+      <h2 className="text-3xl font-bold text-gray-800 mb-8">Kontak Kami</h2>
+      <p className="text-lg text-gray-600 mb-8">
+        Hubungi kami untuk informasi lebih lanjut tentang layanan kami.
+      </p>
+      <form className="space-y-4">
+        <div className="flex flex-col">
+          <input
+            type="text"
+            placeholder="Nama"
+            className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-      </section>
+        <div className="flex flex-col">
+          <input
+            type="email"
+            placeholder="Email"
+            className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div className="flex flex-col">
+          <textarea
+            placeholder="Pesan"
+            className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200"
+        >
+          Kirim Pesan
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 
       {isDiagnosisOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
