@@ -23,8 +23,8 @@ const diagnosis = {
       "Apakah keluarnya blue screen pada OS Windows?",
       "Apakah belum sampai Windows sudah restart lagi?",
     ],
-    detail: "Masalah pada motherboard atau BIOS",
-    solution: "Periksa koneksi hardware, coba reset BIOS atau update BIOS.",
+    detail: "Masalah pada RAM",
+    solution: "Periksa komponen RAM dan coba bersihkan slot RAM, atau ganti RAM.",
   },
   A03: {
     questions: [
@@ -34,7 +34,7 @@ const diagnosis = {
       "Apakah keluarnya blue screen pada OS Windows?",
       "Apakah belum sampai Windows sudah restart lagi?",
     ],
-    detail: "Masalah pada hard drive",
+    detail: "Masalah pada Penyimpanan",
     solution:
       "Periksa hard drive untuk bad sector, lakukan backup data dan pertimbangkan untuk mengganti hard drive.",
   },
@@ -46,7 +46,7 @@ const diagnosis = {
       "Apakah device driver informasi tidak terdeteksi dalam device manager?",
       "Apakah keluarnya blue screen pada OS Windows?",
     ],
-    detail: "Masalah pada kartu grafis",
+    detail: "Masalah pada kartu grafis/VGA",
     solution:
       "Periksa koneksi kartu grafis, update atau reinstall driver kartu grafis.",
   },
@@ -58,8 +58,8 @@ const diagnosis = {
       "Apakah keluarnya blue screen pada OS Windows?",
       "Apakah masalah pada koneksi dan inputan?",
     ],
-    detail: "Masalah pada RAM",
-    solution: "Periksa RAM, coba bersihkan slot RAM, atau ganti RAM.",
+    detail: "Masalah pada OS",
+    solution: "Update OS atau reinstall OS.",
   },
   A06: {
     questions: [
@@ -102,9 +102,9 @@ const diagnosis = {
       "Apakah keluarnya blue screen pada OS Windows?",
       "Apakah aplikasi sering not responding?",
     ],
-    detail: "Masalah pada sistem operasi atau software",
+    detail: "Masalah pada software",
     solution:
-      "Periksa dan update sistem operasi dan driver, pertimbangkan untuk reinstall sistem operasi.",
+      "Periksa dan update software dan driver, pertimbangkan untuk reinstall software.",
   },
 };
 
