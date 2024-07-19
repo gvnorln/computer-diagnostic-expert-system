@@ -137,6 +137,8 @@ const App = () => {
                       <p className="text-lg text-gray-700"><strong>Kode Kerusakan:</strong> {issue.code}</p>
                       <p className="mt-2 text-gray-600"><strong>Detail:</strong> {issue.detail}</p>
                       <p className="mt-2 text-gray-600"><strong>Persentase:</strong> {issue.cf}%</p>
+                      <p className="mt-2 text-gray-600"><strong>Solusi:</strong> {issue.solution}</p>
+                      
                     </li>
                   ))}
                 </ul>

@@ -11,6 +11,7 @@ export default function handler(req, res) {
           questions: [
             "Apakah lampu indikator power pada monitor tidak menyala sama sekali?",
             "Apakah terdapat garis horisontal/vertikal di tengah monitor?",
+            "Apakah tampak blok hitam, dan gambar tidak simetris/ acak?",
           ],
           detail: "Kerusakan pada monitor",
           solution:
@@ -113,20 +114,28 @@ export default function handler(req, res) {
       };
 
       const rules = [
-        { issue: 'A01', symptoms: [true, true, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, null, null, null], cf: 0.8 },
-        { issue: 'A02', symptoms: [null, null, true, true, null, true, true, null, null, null, true, true, null, true, null, null, null, null, null, null, null], cf: 0.7 },
-        { issue: 'A03', symptoms: [null, null, null, null, null, null, true, true, null, null, true, true, null, true, null, null, null, null, null, null, null], cf: 0.7 },
-        { issue: 'A04', symptoms: [null, null, true, null, null, true, null, null, true, true, null, true, null, null, null, null, null, null, null, null, null], cf: 0.8 },
-        { issue: 'A05', symptoms: [null, null, null, null, null, null, true, null, null, true, true, true, true, null, null, null, null, null, null, null, null], cf: 0.6 },
-        { issue: 'A06', symptoms: [null, null, null, null, true, null, null, null, null, null, null, null, null, null, true, null, null, null, null, true, true], cf: 0.9 },
-        { issue: 'A07', symptoms: [null, null, null, null, null, true, null, null, true, true, null, null, true, null, null, null, null, true, null, true, null], cf: 0.85 },
-        { issue: 'A08', symptoms: [true, true, null, true, null, null, null, null, null, null, null, null, null, null, true, true, null, null, null, null, null], cf: 0.7 },
-        { issue: 'A09', symptoms: [null, null, null, null, null, null, true, null, null, null, null, true, null, null, null, null, null, null, null, null, true], cf: 0.6 },
+        { issue: 'A01', symptoms: [true, true, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, null, null, null], cf: 1.0 },  // B01, B02, B18
+        { issue: 'A02', symptoms: [null, null, true, true, null, true, true, null, null, null, true, true, null, true, null, null, null, null, null, null, null], cf: 1.0 }, // B03, B04, B06, B07, B11, B12, B14
+        { issue: 'A03', symptoms: [null, null, null, null, null, null, true, true, null, null, true, true, null, true, null, null, null, null, null, null, null], cf: 1.0 }, // B07, B08, B11, B12, B14
+        { issue: 'A04', symptoms: [null, null, true, null, null, true, null, null, true, true, null, true, null, null, null, null, null, null, null, null, null], cf: 1.0 },  // B03, B06, B09, B10, B12
+        { issue: 'A05', symptoms: [null, null, null, null, null, null, true, null, null, true, true, true, true, null, null, null, null, null, null, null, null], cf: 1.0 },  // B07, B10, B11, B12, B13
+        { issue: 'A06', symptoms: [null, null, null, null, true, null, null, null, null, null, null, null, null, null, true, null, null, null, null, true, true], cf: 1.0 },  // B05, B15, B20, B21
+        { issue: 'A07', symptoms: [null, null, null, null, null, true, null, null, null, true, null, null, true, null, true, null, true, null, null, null, true], cf: 1.0 }, // B06, B10, B13, B15, B17, B21
+        { issue: 'A08', symptoms: [null, null, true, true, null, null, null, null, null, null, null, null, null, null, true, true, null, null, null, null, null], cf: 1.0 },  // B03, B04, B15, B16
+        { issue: 'A09', symptoms: [null, null, null, null, null, null, true, null, null, null, null, true, null, null, null, null, null, null, true, null, null], cf: 1.0 },  // B07, B12, B19
       ];
 
       const identifiedIssues = rules.reduce((acc, rule) => {
         const matchedSymptoms = rule.symptoms.filter((symptom, index) => symptom !== null && symptom === answers[index]);
-        const cf = rule.cf * (matchedSymptoms.length / rule.symptoms.filter(symptom => symptom !== null).length);
+        const mismatchedSymptoms = rule.symptoms.filter((symptom, index) => symptom !== null && symptom !== answers[index]);
+        let cf = rule.cf;
+
+        // Mengurangi nilai CF berdasarkan gejala yang tidak cocok
+        if (mismatchedSymptoms.length > 0) {
+          const totalSymptoms = rule.symptoms.filter(symptom => symptom !== null).length;
+          const correctRatio = matchedSymptoms.length / totalSymptoms;
+          cf *= correctRatio;
+        }
 
         if (cf > 0) {
           acc.push({
